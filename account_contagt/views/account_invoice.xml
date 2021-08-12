@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2016-2017 LasLabs Inc.
+    License LGPL-3 or later (http://www.gnu.org/licenses/lgpl.html).
+-->
+
+<odoo>
+
+	<!-- Tipo de Gasto o compra 
+    <record id="hr_payroll_pagoorden_view_tree" model="ir.ui.view">
+        <field name="name">Tipo de Venta Tree</field>
+        <field name="model">account.invoice.tipo.gasto</field>
+        <field name="arch" type="xml">
+            <tree string='Pago de Ordenes' editable="bottom">
+                <field name="tipo" string="Tipo"/>
+                <field name="de_venta" string="Para Venta"/>
+                <field name="de_compra" string="Para Compra"/>
+            </tree>
+        </field>
+    </record>-->
+	
+	<!-- Datos generales de Factura Cliente -->
+    <record id="invoice_form_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.form.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="tipo_fac"/>
+            </xpath>
+        </field>
+    </record>
+
+	<!-- Datos generales de Factura Proveedor -->
+    <record id="account_invoice_supplier_view_form_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.view.form.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+			<field name="user_id" position="replace">			
+			</field>
+			<xpath expr="//field[@name='date_invoice']" position="before">
+                <field name="no_serie"/>
+                <field name="no_factura_purc"/>
+            </xpath>
+            <xpath expr="//field[@name='reference']" position="after">
+                <field name="tipo_fac"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
